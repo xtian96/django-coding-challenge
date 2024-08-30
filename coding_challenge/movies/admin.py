@@ -8,6 +8,6 @@ class MovieAdminConsole(admin.ModelAdmin):
         "id",
         "title",
         "runtime",
-        "release_date",
+        "release_date"
     )
 

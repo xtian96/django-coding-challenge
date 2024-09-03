@@ -13,7 +13,7 @@ class MovieDetailView(View):
             'director': movie.director,
             'release_date': movie.release_date,
             'runtime_formatted': movie.runtime_formatted(),
-            'avg_rating': movie.avg_rating(),
+            'avg_rating': movie.avg_rating,
             'reviews': [{'name': review.name, 'rating': review.rating} for review in reviews]
         }
         return JsonResponse(data)

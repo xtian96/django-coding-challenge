@@ -11,4 +11,4 @@ class MovieSerializer(serializers.ModelSerializer):
         return obj.runtime_formatted()
 
     def get_avg_rating(self, obj):
-        return obj.avg_rating()
+        return obj.average_rating()

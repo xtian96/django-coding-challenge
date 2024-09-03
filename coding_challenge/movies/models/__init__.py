@@ -1,3 +1,4 @@
-from .movie import Movie, Reviews
+from .movie import Movie
+from .review import Review
 
-__all__ = ["Movie", 'Reviews']
+__all__ = ["Movie", "Review"]

@@ -4,7 +4,7 @@ from django.db import migrations, models
 
 def populate_db(apps, schema_editor):
     Movie = apps.get_model("movies", "Movie")
-    Reviews = apps.get_model("movies", "Reviews")
+    Review = apps.get_model("movies", "Review")
     db_alias = schema_editor.connection.alias
 
     # Create movies
@@ -25,46 +25,25 @@ def populate_db(apps, schema_editor):
     )
 
     # Create reviews
-    Reviews.objects.using(db_alias).bulk_create([
-        Reviews(movie=forrest_gump, name="Reviewer 1", rating=9),
-        Reviews(movie=forrest_gump, name="Reviewer 2", rating=8),
-        Reviews(movie=toy_story, name="Reviewer 1", rating=8),
-        Reviews(movie=toy_story, name="Reviewer 2", rating=9),
-        Reviews(movie=captain_phillips, name="Reviewer 1", rating=7),
-        Reviews(movie=captain_phillips, name="Reviewer 2", rating=8),
-        Reviews(movie=catch_me_if_you_can, name="Reviewer 1", rating=8),
-        Reviews(movie=catch_me_if_you_can, name="Reviewer 2", rating=9),
-        Reviews(movie=bridge_of_spies, name="Reviewer 1", rating=7),
-        Reviews(movie=bridge_of_spies, name="Reviewer 2", rating=8),
+    Review.objects.using(db_alias).bulk_create([
+        Review(movie=forrest_gump, name="Reviewer 1", rating=5, comment="Amazing movie!"),
+        Review(movie=forrest_gump, name="Reviewer 2", rating=4, comment="Great story."),
+        Review(movie=toy_story, name="Reviewer 1", rating=4, comment="Loved it!"),
+        Review(movie=toy_story, name="Reviewer 2", rating=5, comment="Fantastic animation."),
+        Review(movie=captain_phillips, name="Reviewer 1", rating=3, comment="Thrilling."),
+        Review(movie=captain_phillips, name="Reviewer 2", rating=4, comment="Very engaging."),
+        Review(movie=catch_me_if_you_can, name="Reviewer 1", rating=4, comment="Great performances."),
+        Review(movie=catch_me_if_you_can, name="Reviewer 2", rating=5, comment="Very entertaining."),
+        Review(movie=bridge_of_spies, name="Reviewer 1", rating=4, comment="Well made."),
+        Review(movie=bridge_of_spies, name="Reviewer 2", rating=3, comment="Good but slow."),
     ])
-
-def empty_db(apps, schema_editor):
-    Movie = apps.get_model("movies", "Movie")
-    Reviews = apps.get_model("movies", "Reviews")
-    db_alias = schema_editor.connection.alias
-
-    Reviews.objects.using(db_alias).filter(movie__title__in=[
-        "Forrest Gump",
-        "Toy Story",
-        "Captain Phillips",
-        "Catch Me If You Can",
-        "Bridge of Spies",
-    ]).delete()
-
-    Movie.objects.using(db_alias).filter(title__in=[
-        "Forrest Gump",
-        "Toy Story",
-        "Captain Phillips",
-        "Catch Me If You Can",
-        "Bridge of Spies",
-    ]).delete()
 
 class Migration(migrations.Migration):
 
     dependencies = [
-        ("movies", "0001_initial"),
+        ('movies', '0001_initial'),  # Ensure this matches your initial migration
     ]
 
     operations = [
-        migrations.RunPython(populate_db, empty_db),
+        migrations.RunPython(populate_db),
     ]

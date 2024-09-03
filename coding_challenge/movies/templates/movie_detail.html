@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{ movie.title }}</title>
+</head>
+<body>
+    <h1>{{ movie.title }}</h1>
+    <p>Runtime: {{ movie.runtime }} minutes</p>
+    <p>Release Date: {{ movie.release_date }}</p>
+    <p>Average Rating: {{ movie.avg_rating }}</p>
+
+    <h2>Reviews:</h2>
+    <ul>
+        {% for review in reviews %}
+            <li>
+                <strong>Name:</strong> {{ review.name }}<br>
+                <strong>Rating:</strong> {{ review.rating }}
+            </li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
